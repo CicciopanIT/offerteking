@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Generatore Card Offerte - Admin</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1c1c1e;
+            --accent-blue: #2196f3;
+            --accent-pink: #e91e63;
+            --text-main: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .badge-tech {
+            background: #e91e63;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-casa { background: #ff9800 !important; }
+        .badge-alimentari { background: #03a9f4 !important; }
+        .badge-errore-prezzo { background: #ff0000 !important; }
+
+        .form-container, .preview-container {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 { color: var(--accent-blue); margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #a0a0a0; font-size: 14px; }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: #2c2c2e;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            background: #000;
+            color: #00ff00;
+            font-family: monospace;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            resize: none;
+        }
+
+        #render-preview {
+            border: 1px dashed #444;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Dati Prodotto</h2>
+        <div class="input-group">
+            <label>Titolo Prodotto</label>
+            <input type="text" id="title" placeholder="Esempio: Xiaomi Poco C65">
+        </div>
+        <div class="input-group">
+            <label>URL Immagine</label>
+            <input type="text" id="imgUrl">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <div class="input-group" style="flex: 1;">
+                <label>Prezzo Scontato (€)</label>
+                <input type="text" id="price" placeholder="25.90">
+            </div>
+            <div class="input-group" style="flex: 1;">
+                <label>Prezzo Vecchio (€)</label>
+                <input type="text" id="oldPrice" placeholder="29.90">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Link Affiliato</label>
+            <input type="text" id="affLink">
+        </div>
+        <div class="input-group">
+            <label>Categoria</label>
+            <select id="category">
+                <option value="TECH">Tech</option>
+                <option value="ALIMENTARI">Alimentari</option>
+                <option value="CASA">Casa</option>
+                <option value="ERRORE-PREZZO">Errore di Prezzo</option>
+                <option value="BLACK-FRIDAY">Black Friday</option>
+        		<option value="PRIME-DAY">Prime Day</option>
+            </select>
+        </div>
+        <button onclick="generateCard()">Genera Codice HTML</button>
+        <button onclick="copyToClipboard()" id="copyBtn" style="background: var(--accent-blue); margin-top: 10px;">Copia negli Appunti</button>
+        <textarea id="outputCode" readonly></textarea>
+    </div>
+
+    <div class="preview-container">
+        <h2>Anteprima</h2>
+        <div id="render-preview"></div>
+    </div>
+
+    <script>
+        function generateCard() {
+            const title = document.getElementById('title').value;
+            const imgUrl = document.getElementById('imgUrl').value;
+            const priceVal = document.getElementById('price').value.replace(',', '.');
+            const oldPriceVal = document.getElementById('oldPrice').value.replace(',', '.');
+            const affLink = document.getElementById('affLink').value;
+            const cat = document.getElementById('category').value;
+            const categoryClass = "badge-" + cat.toLowerCase(); 
+
+            // Cattura data di oggi
+            const dataOggi = new Date().toISOString().split('T')[0];
+
+            const p1 = parseFloat(priceVal) || 0;
+            const p2 = parseFloat(oldPriceVal) || 0;
+            
+            const priceParts = priceVal.split('.');
+            const euro = priceParts[0] || '0';
+            const cent = (priceParts[1] || '00').padEnd(2, '0').substring(0, 2);
+
+            let scontoHtml = '';
+            if (p2 > p1) {
+                const diff = (p2 - p1).toFixed(2);
+                scontoHtml = `<span class="testo-risparmio">-${diff}€ <del class="prezzo-precedente">${oldPriceVal}€</del></span>`;
+            }
+
+            // HTML GENERATO
+            const cardHtml = `<article class="prodotto-card">
+    <header class="card-header">
+        <span class="badge-tech ${categoryClass}">${cat}</span>
+        <span class="data-post" data-pub="${dataOggi}">Oggi</span>
+    </header>
+    <div class="prodotto-img-container">
+        <img src="${imgUrl}" alt="${title}" class="img-prod">
+    </div>
+    <div class="card-dettagli">
+        <h3 class="titolo-prodotto">${title}</h3>
+        <p class="prezzo-attuale">${euro}<sup class="prezzo-cent">,${cent}€</sup></p>
+        <div class="prezzo-sconto-box">
+            <span class="badge-migliore">
+                <svg viewBox="0 0 24 24" style="width:14px;fill:white;vertical-align:middle;"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" /></svg>
+                MIGLIORE
+            </span>
+            ${scontoHtml}
+        </div>
+    </div>
+    <div class="cta-container">
+        <a href="${affLink}" class="btn-amazon" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" alt="Amazon Logo" style="height:20px;vertical-align:middle;margin-right:5px;">
+            Apri su Amazon
+        </a>
+    </div>
+</article>`;
+
+        document.getElementById('outputCode').value = cardHtml;
+        document.getElementById('render-preview').innerHTML = cardHtml;
+        copyToClipboard();
+        }
+
+        function copyToClipboard() {
+            const copyText = document.getElementById("outputCode");
+            const btn = document.getElementById("copyBtn");
+            if(!copyText.value) return;
+            
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = "✅ Copiato!";
+                btn.style.background = "#4caf50";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "var(--accent-blue)";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

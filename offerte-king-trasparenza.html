@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Offerte King: Risparmio Reale e Verificato. Selezioniamo a mano le migliori offerte Amazon. Unisciti al nostro canale Telegram.">
+    <title>Offerte King | Risparmio Senza Compromessi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="stilking.css?v=1.1">
+</head>
+<body>
+<header>
+    <div class="brand-wrapper">
+        <a href="index.html" class="brand-link">
+            <div class="logo-area">
+                <img src="logo_offerte_amazon.png" alt="Logo Offerte King" />
+            </div>
+            <div class="header-titles">
+                <h1>Offerte King</h1>
+                Risparmio Senza Compromessi
+            </div>
+        </a>
+    </div>
+<nav><a title="Offerte King" href="https://t.me/+oNGVHZMKOydkY2Q0" target="_blank" rel="noopener">Telegram</a> <a title="Vedi offerte" href="/offerte-giornaliere.html#offerte">Alcune Offerte</a><a title="Guida Codici Sconto" href="/guida-codici-sconto-amazon.html">Guida Codici Sconto</a> <a title="info trasparenza" href="#info">Info</a>
+</nav>
+</header>
+
+<section class="hero">
+<section id="info">
+    <div class="info-section">
+        
+        <div class="info-block">
+            <div class="category-header">
+                <h2>Chi Siamo</h2>
+            </div>
+            <p class="intro-text">
+                <strong>Offerte King</strong> è un servizio completamente gratuito nato con un unico obiettivo: scovare e segnalare le migliori opportunità di risparmio disponibili sul web.
+            </p>
+            <p>
+                A differenza di molti sistemi automatizzati, dietro <strong>Offerte King</strong> ci sono persone reali e appassionate che analizzano il mercato ogni giorno. Selezioniamo con cura ogni singola promozione, pubblicando solo sconti reali su prodotti che garantiscano un alto standard di qualità. 
+            </p>
+            <p>
+                Anche la scelta dei negozi è rigorosa: segnaliamo esclusivamente siti di comprovata affidabilità, per permetterti di acquistare in totale serenità.
+            </p>
+            
+            <div class="highlight-box">
+                <h3>&#128081; Ci aiuti a crescere?</h3>
+                <p>Se apprezzi il nostro lavoro, condividi il nostro sito con amici e parenti. Aiuterai loro a risparmiare e darai a noi la forza per offrirti un servizio sempre migliore.</p>
+            </div>
+        </div>
+
+        <div class="info-block" style="margin-top: 50px;">
+            <div class="category-header">
+                <h2>Cose da Sapere</h2>
+            </div>
+            
+            <div class="disclaimer-grid">
+                <div class="disclaimer-item">
+                    <h4>⚡ Variazioni di Prezzo</h4>
+                    <p>I prezzi online sono estremamente volatili. Le offerte potrebbero esaurirsi o variare pochi istanti dopo la pubblicazione. Se vedi un'offerta "King", il tempismo è tutto!</p>
+                </div>
+
+                <div class="disclaimer-item">
+                    <h4>&#128176; Indipendenza</h4>
+                    <p>Siamo una realtà libera e indipendente. Non siamo sponsorizzati dai negozi che segnaliamo: questo ci permette di essere oggettivi e onesti nelle nostre selezioni.</p>
+                </div>
+
+                <div class="disclaimer-item">
+                    <h4>⚠️ Responsabilità</h4>
+                    <p>Proponiamo solo acquisti sicuri, tuttavia Offerte King non è responsabile per problematiche derivanti dall'acquisto (annullamenti, ritardi o prodotti difettosi).</p>
+                </div>
+
+                <div class="disclaimer-item">
+                    <h4>&#128230; Assistenza e Garanzia</h4>
+                    <p>L'acquisto avviene sempre sui siti dei venditori. Per assistenza, resi o garanzia, dovrai fare riferimento direttamente al negozio presso cui hai pagato.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</section>
+<!-- --------------------------------------------------------------------------------------------->
+<footer style="text-align: center; padding: 40px; color: #444; font-size: 0.8rem; border-top: 1px solid #1e1e1e;">&copy; 2026 Offerte King - Selezione manuale offerte Amazon.</footer>
+<p>&nbsp;</p>
+<!-- ---------------------------------------------------------------------------------------------->
+<button onclick="topFunction()" id="backToTop" title="Torna su">
+  <svg viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>
+</button>
+
+<script>
+// Mostra il tasto quando l'utente scende di 300px
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  const btn = document.getElementById("backToTop");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+}
+
+// Quando si clicca, torna su con uno scroll fluido
+function topFunction() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+<!--GESTIONE DELLE DATE-->
+<script>
+function aggiornaDateVetrina() {
+    const elementiData = document.querySelectorAll('.data-post');
+    const oggi = new Date();
+
+    elementiData.forEach(el => {
+        const dataPubRaw = el.getAttribute('data-pub');
+        if (!dataPubRaw) return;
+
+        const dataPub = new Date(dataPubRaw);
+        const differenzaTempo = oggi - dataPub; // Differenza in millisecondi
+        const giorniTrascorsi = Math.floor(differenzaTempo / (1000 * 60 * 60 * 24));
+
+        let testoData = "";
+
+        if (giorniTrascorsi === 0) {
+            testoData = "Oggi";
+        } else if (giorniTrascorsi === 1) {
+            testoData = "Ieri";
+        } else if (giorniTrascorsi < 7) {
+            testoData = giorniTrascorsi + " giorni fa";
+        } else {
+            testoData = "Più di una settimana fa";
+            // Opzionale: puoi cambiare colore se l'offerta è vecchia
+            el.style.color = "#ff4444"; 
+        }
+
+        el.innerText = testoData;
+    });
+}
+
+// Avvia il calcolo all'apertura della pagina
+document.addEventListener('DOMContentLoaded', aggiornaDateVetrina);
+</script>
+</body>
+</html>
