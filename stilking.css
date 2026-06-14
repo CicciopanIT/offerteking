@@ -766,17 +766,26 @@
 
     }
       /* Stile specifico per i testi della sezione Info */
-      .info-block p {
-          color: var(--text-dim);
-          margin-bottom: 15px;
-          text-align: left;
-          font-size: 0.95rem;
-      }
+      /* Definisce una spaziatura interna per tutti i blocchi informativi */
+        .info-block {
+            padding: 8px 25px; /* Spazio ridotto sopra/sotto (8px), ottimo stacco ai lati (25px) */
+            margin-top: 15px;  /* Margine base ridotto */
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
 
-      .intro-text {
-          color: var(--text-main) !important;
-          font-size: 1.1rem !important;
-      }
+        /* Assicurati che anche i riquadri in evidenza abbiano il giusto spazio interno */
+        .highlight-box {
+            padding: 20px;
+            margin: 30px 0;
+            box-sizing: border-box;
+        }
+
+        /* Ottimizzazione per i testi generici delle introduzioni */
+        .intro-text {
+            padding: 10px 20px;
+            line-height: 1.7;
+        }
 
       /* Griglia per il disclaimer (2 colonne su PC, 1 su Mobile) */
       .disclaimer-grid {
