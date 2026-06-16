@@ -1184,12 +1184,12 @@
                 border-radius: 8px; /* Angoli leggermente più netti come nell'esempio */
 
             }
+        .categoria-box-azzurro img {
+            width: 100% !important;     /* Costringe l'immagine a occupare tutta la larghezza del box */
+            height: 140px !important;    /* Blocca l'altezza per tutte le copertine alla stessa misura */
+            object-fit: cover !important; /* Taglia l'immagine in modo intelligente senza schiacciarla o deformarla */
+            display: block;
+        }
         
 
         }
-.categoria-box-azzurro img {
-    width: 100% !important;     /* Costringe l'immagine a occupare tutta la larghezza del box */
-    height: 140px !important;    /* Blocca l'altezza per tutte le copertine alla stessa misura */
-    object-fit: cover !important; /* Taglia l'immagine in modo intelligente senza schiacciarla o deformarla */
-    display: block;
-}
